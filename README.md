@@ -2,8 +2,8 @@
 
 ## Authors
 
-Sergio Sanz
-Mila Miletic
+Sergio Sanz  
+Mila Miletic  
 
 ## Overview
 
