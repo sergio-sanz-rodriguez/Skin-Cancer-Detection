@@ -1,3 +1,4 @@
+![Project Image](images/intro_picture.png)
 # Skin Cancer Detection Project
 
 ## Authors
