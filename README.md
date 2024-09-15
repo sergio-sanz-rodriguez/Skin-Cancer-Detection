@@ -33,7 +33,7 @@ Another key aspect to highlight is that there is no feature in the metadata that
 
 Fixme.
 
-![Model Pipeline](images/model_pipeline.png)
+<img src="images/model_pipeline.png" alt="Model Pipeline" width="400"/>
 
 ## Description of the Notebooks
 
