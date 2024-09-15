@@ -35,7 +35,14 @@ Fixme.
 
 <div align="center">
   <img src="images/model_pipeline.png" alt="Model Pipeline" width="500"/>
+  <p><strong>Figure 1:</strong> Proposed machine learning architecture</p>
 </div>
+
+<div align="center">
+  <img src="images/boosting_classifiers.png" alt="Boosting Classifiers" width="1000"/>
+  <p><strong>Figure 2:</strong> Pipeline of the boosting classifiers: XGBoost, LightGBM, Gradient Boosting</p>
+</div>
+
 
 ## Description of the Notebooks
 
