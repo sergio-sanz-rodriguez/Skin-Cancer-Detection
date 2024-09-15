@@ -33,6 +33,8 @@ Another key aspect to highlight is that there is no feature in the metadata that
 
 Fixme.
 
+![Model Pipeline](images/model_pipeline.png)
+
 ## Description of the Notebooks
 
 Fixme.
