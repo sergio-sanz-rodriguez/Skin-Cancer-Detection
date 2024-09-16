@@ -58,8 +58,9 @@ Finally, the outputs of the boosting classifiers are evaluated using the **Soft 
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
-- **Public Score (~28%)**: 0.1649
-- **Private Score (~72%)**: 0.1516
+- **Cross-validation score (training)**: 0.1653
+- **Public Score (~28% of test data)**: 0.1649
+- **Private Score (~72% of test data)**: 0.1516
 
 ## Description of the Notebooks
 
