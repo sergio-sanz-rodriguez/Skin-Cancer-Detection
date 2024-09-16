@@ -51,12 +51,12 @@ The three boosting classifiers rely on the same pre-processing pipeline (see Fig
   <p><strong>Figure 2:</strong> Pipeline of the boosting classifiers: XGBoost, LightGBM, Gradient Boosting</p>
 </div>
 <br>
-Finally, the outputs of the boosting classifiers are evaluated using the Soft Voting ensemble approach. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 20% of the total test samples, and private pAUC scores, representing the remaining 70%, was the arithmetic averate, that is, weights [1, 1, 1]. 
+Finally, the outputs of the boosting classifiers are evaluated using the Soft Voting ensemble approach. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 28% of the total test samples, and private pAUC scores, representing the remaining 72%, was the arithmetic averate, that is, weights [1, 1, 1]. 
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
-- **Public Score**: 0.1649
-- **Private Score**: 0.1516
+- **Public Score (~28%)**: 0.1649
+- **Private Score (~72%)**: 0.1516
 
 ## Description of the Notebooks
 
