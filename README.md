@@ -1,10 +1,13 @@
-![Project Image](images/intro_picture.png)
+<div align="center">
+  <img src="images/intro_picture.png" alt="Into Picture" width="1000"/>
+</div>
+
 # Skin Cancer Detection Project
 
 ## Authors
 
+Mila Miletic
 Sergio Sanz  
-Mila Miletic  
 
 ## Overview
 
@@ -35,18 +38,19 @@ As shown in Figure 1, the proposed machine learning model consists of a **Convol
 
 The training process of the CNN has been carefully designed to ensure class balancing and, more importantly, to avoid data leakage to the next stages of the proposed pipeline. The CNN output feeds the thee bossting machines along with the metadata features provided by Kaggle. In addition to the original metadata, new usesul feature were calculated using some of the published notebooks as references (e.g. click [here](https://www.kaggle.com/code/vyacheslavbolotin/isic-2024-only-tabular-data-new-features)).
 
+<br>
 <div align="center">
   <img src="images/model_pipeline.png" alt="Model Pipeline" width="500"/>
   <p><strong>Figure 1:</strong> Proposed machine learning architecture</p>
 </div>
-
+<br>
 The three boosting classifiers rely on the same pre-processing pipeline (see Figure 2). The numerical features are scaled using the robust scaler method and the categorical features are one-hot encoded. The CNN predictions do not have to be scaled, since they already represent cancer probabilities between 0 (benign) and 1 (malignant). Due to the huge amount of metadata samples, the features belonging to the majority class (benign cases) are randomly downscaled up to 40,000 samples, and those belonging to the minory class are upscalded (with SMOTE) up to 4,000 samples.
-
+<br>
 <div align="center">
   <img src="images/boosting_classifiers.png" alt="Boosting Classifiers" width="1000"/>
   <p><strong>Figure 2:</strong> Pipeline of the boosting classifiers: XGBoost, LightGBM, Gradient Boosting</p>
 </div>
-
+<br>
 Finally, the outputs of the boosting classifiers are evaluated using the Soft Voting ensemble approach. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 20% of the total test samples, and private pAUC scores, representing the remaining 70%, was the arithmetic averate, that is, weights [1, 1, 1]. 
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
