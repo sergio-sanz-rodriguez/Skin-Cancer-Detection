@@ -6,8 +6,8 @@
 
 ## Authors
 
-Mila Miletic
-Sergio Sanz  
+[Mila Miletic](https://www.linkedin.com/in/mila-miletic-19168a123/)    
+[Sergio Sanz](https://www.linkedin.com/in/sergio-sanz-rodriguez/)
 
 ## Overview
 
@@ -36,7 +36,7 @@ Another key aspect to highlight is that there is no feature in the metadata that
 
 As shown in Figure 1, the proposed machine learning model consists of a **Convolutional Neural Network (CNN)**, three boosting classifiers: **XGBoost**, **LightGBM**, and **Gradient Boosting Machine (GBM)**, and a a final **Soft Voting** predictor. The CNN architecture is composed of a [ResNet152V2](https://keras.io/api/applications/resnet/#resnet152v2-function) backbone for feature extraction, a global average pooling layer as an input layer to the neural network, a hidden layer with 64 neurons, and an output layer with a sigmoid activation function for binary classification. It is worth mentioning that the backone layers have also been trained (i.e., no transfer learning was used) to maximize prediction accuracy and recall. 
 
-The training process of the CNN has been carefully designed to ensure class balancing and, more importantly, to avoid data leakage to the next stages of the proposed pipeline. The CNN output feeds the thee bossting machines along with the metadata features provided by Kaggle. In addition to the original metadata, new usesul feature were calculated using some of the published notebooks as references (e.g. click [here](https://www.kaggle.com/code/vyacheslavbolotin/isic-2024-only-tabular-data-new-features)).
+The training process of the CNN has been carefully designed to ensure class balancing and, more importantly, to avoid data leakage to the next stages of the proposed pipeline. The CNN generates a **cross-validated CNN prediction vector** and feeds the thee bossting machines along with the metadata features provided by Kaggle. In addition to the original metadata, **Feature Engineering (FE)** is carried out to generate new useful features (e.g. click [here](https://www.kaggle.com/code/vyacheslavbolotin/isic-2024-only-tabular-data-new-features) for more details).
 
 <br>
 <div align="center">
@@ -54,7 +54,7 @@ The three boosting classifiers rely on the same pre-processing pipeline (see Fig
 </div>
 <br>
 
-Finally, the outputs of the boosting classifiers are evaluated using the **Soft Voting** ensemble approach. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 28% of the total test samples, and private pAUC scores, representing the remaining 72%, was the arithmetic averate, that is, weights [1/3, 1/3, 1/3]. 
+Finally, the outputs of the boosting classifiers are evaluated using the **Soft Voting** ensemble method. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 28% of the total test samples, and private pAUC scores, representing the remaining 72%, was the arithmetic averate, that is, weights [1/3, 1/3, 1/3]. 
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
@@ -64,5 +64,9 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
 ## Description of the Notebooks
 
-Fixme.
-
+- **[Notebook_Skin_Cancer_Detection_v5/v6.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notebook_Skin_Cancer_Detection_v6.ipynb)**: A notebook unifying the whole skin cancer detection worflow: training with cross-validation, and inference. The training with cross-validation process is divided into the following stages: Exploratory Data Analysis (EDA) and cleaning, metadata Feature Engineering (FE), CNN-model training, and ML-model training (XGB, LGB, GBM). The inference stage makes predictions using the already trained models and the test dataset. Versions v5 and v6 are identical, but v6 achieve slightly better training scores.
+- **[Prepare_Images_CNN_v1.pynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Prepare_Images_CNN_v1.ipynb)**: This notebook classifies the training image set into two target categories: benign and malignant. Two folders created: "0" and "1". In folder "0" the images with benign lesions are stored, whereas the rest of images go to folder "1". The parent directory called **"crossval"** shall be used for the reproducibility of the remaning notebooks. The other folders, "train" and "test" are used for internal purposes only.
+- **[CNN_ResNet152V2_TrainCrossVal_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_ResNet152V2_TrainCrossVal_v1.ipynb)**: In this notebook, the cross-validated CNN prediction vector is generated (see Figure 1). The CNN is trained using the stratyfied K-fold strategy, being K equal to 5 folds. Predictions are made out-of-sample using unseen data, that is: for each fold, a CNN model is trained using 4 folds and predictions are made on the remaining fold. In this way, all the predicitons in the cross-validated CNN feature vector are made on unseen data. This approach follows the principles to ensure **integrity of the final ML model avoding data leakage**.
+- **[Train_CNN_ResNet152V2_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Train_CNN_RestNet152V2_v1.ipynb)**: In this notebook, the CNN model is trained using the whole training image set for inference on the test samples. The notebook stores the model parameters in .h5 format, which can be later on loaded in Notebook_Skin_Cancer_Detection_v5/v6.ipynb. This approach ensures reproducibility in the final pAUC scores, as the same model is always used. Note that the non-detertermistic nature of neural networks makes it difficult to produce the same model parameters when trained several times.
+- **[MLModels_TrainCrossVal_Optuna_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/MLModels_TrainCrossVal_Optuna_v1.ipynb)**: This notebook is dedicatetd to hyperparameter optimization for multiple ML models. The algorithm relies on the [Optuna](https://optuna.readthedocs.io/en/stable/index.html) framework to explore and identifiy the best hyperparameter set that maximizes the pAUC score. To ensure robust model evaluation, stratified K-fold cross-validation is utilized on top of Optuna.
+- **[Notes.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notes.ipynb)**: A document containing useful recommendations and code snippets for training CNNs. It includes guidance on enabling GPU support with Keras, handling data imbalance problems, and addressing other training-related issues.
