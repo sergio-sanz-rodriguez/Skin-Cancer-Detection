@@ -11,7 +11,7 @@
 
 ## Overview
 
-This project belongs to a Kaggle competition on [ISIC 2024 - Skin Cancer Detection with 3D-TBP](https://www.kaggle.com/competitions/isic-2024-challenge/overview), in which the submission deadline was on Friday, September 6 2024.
+This project belongs to a Kaggle competition on [ISIC 2024 - Skin Cancer Detection with 3D-TBP](https://www.kaggle.com/competitions/isic-2024-challenge/overview) with a submission deadline on September 6, 2024.
 
 The project focuses on the development of machine learning (ML) and deep learning (DL) algorithms to identify histologically confirm skin cancer cases with single-lesion crops from body images. In addition to the image database, a comprehensive set of metadata information related to the lesion is employed to train the models. For more information about the metadata features, please visit the aforementioned link. Therefore, in this challenge a binary classification system will be built, tested, and evaluated, combining image-based deep learning neural networks with advanced machine learning models to identify whether the sample correspond to a benign or a malignant case. 
 
