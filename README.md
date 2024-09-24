@@ -76,7 +76,7 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
  <br>
 <div align="center">
-  <img src="images/model_pipeline_enhanced.png" alt="Enhanced Model Pipeline" width="500"/>
+  <img src="images/model_pipeline_enhanced.png" alt="Enhanced Model Pipeline" width="700"/>
   <p><strong>Figure 1:</strong> Proposed machine learning architecture</p>
 </div>
 <br>
