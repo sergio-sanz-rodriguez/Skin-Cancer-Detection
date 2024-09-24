@@ -80,3 +80,9 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
   <p><strong>Figure 2:</strong> Proposed machine learning architecture</p>
 </div>
 <br>
+
+The Partial AUC (pAUC) scores achieved in the competition are as follows:
+
+- **Cross-validation score (training)**: 0.1695
+- **Public Score (~28% of test data)**: 0.1686
+- **Private Score (~72% of test data)**: 0.1554
