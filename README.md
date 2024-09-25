@@ -98,8 +98,8 @@ Figure 4 shows the complete pipeline of the ML models, including: preprocessing,
 
 <br>
 <div align="center">
-  <img src="images/lgb_1_model.png" alt="LGB_1 Pipeline" width="700"/>
-  <img src="images/lgb_2_model.png" alt="LGB_2 Pipeline" width="700"/>
+  <img src="images/lgb_1_model.png" alt="LGB_1 Pipeline" width="1000"/>
+  <img src="images/lgb_2_model.png" alt="LGB_2 Pipeline" width="1000"/>
   <p><strong>Figure 4:</strong> Complete pipeline for the two LightGBM models</p>
 </div>
 <br>
