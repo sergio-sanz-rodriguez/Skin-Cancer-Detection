@@ -110,3 +110,7 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **Cross-validation score (training)**: 0.1695
 - **Public Score (~28% of test data)**: 0.1686
 - **Private Score (~72% of test data)**: 0.1554
+
+## Description of the Notebooks
+
+- **[Train_CNNs_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Train_CNNs_v1.ipynb)**: This notebook is used to train the eight CNNs with the following backbones: BenseNet121, DenseNet201, EfficientNetB0, InceptionResNetV2, InceptionV3, NASNetMobile, ResNet152V2, Xception. All these networks have the same fully connected neural networks: a GlobalAveragePooling stage serializing the output of the backbone; three hidden layers with 1024, 1024, and 64 neurons, respectively; and one single-neuron layer with a sigmoid activation function for binary classification. The whole CNNs, including their backbone stages, have been trained with an RTX 4070 GPU. **Note:** GPU execution is recommended for this notebook.
