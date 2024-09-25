@@ -58,7 +58,7 @@ The three boosting classifiers rely on the same pre-processing pipeline (see Fig
 
 Finally, the outputs of the boosting classifiers are evaluated using the **Soft Voting** ensemble method. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 28% of the total test samples, and private pAUC scores, representing the remaining 72%, was the arithmetic averate, that is, weights [1/3, 1/3, 1/3]. 
 
-### 6.2. pAUC Results
+### 6.2. pAUC Scores
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
@@ -66,7 +66,7 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **Public Score (~28% of test data)**: 0.1649
 - **Private Score (~72% of test data)**: 0.1516
 
-As can be seen, the pAUC score obtained during training is quite similar to that obtained using 28% of the (blind) test data set. However, the model performance decreases about 8% in the remaining test samples.
+As can be seen, the pAUC score obtained during training is quite similar to that obtained using 28% of the (blind) test dataset. However, the model performance decreases by about 8% on the remaining test samples.
 
 ### 6.3. Description of the Notebooks
 
@@ -113,6 +113,7 @@ Figure 4 shows the complete pipeline of the ML models, including: preprocessing,
 </div>
 <br>
 
+### 7.2. pAUC Scores
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
@@ -120,7 +121,9 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **Public Score (~28% of test data)**: 0.1681
 - **Private Score (~72% of test data)**: 0.1557
 
-### 7.2. Description of the Notebooks
+As observed, the improved model generally performs better on both the training and test datasets. On 72% of the test data, this model achieves a pAUC score of 0.1557, compared to 0.1516 achieved by the previous model.
+
+### 7.3. Description of the Notebooks
 
 - **[CNN_DenseNet121_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_DenseNet121_TrainCrossVal_128_v1.ipynb),** **[CNN_DenseNet201_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_DenseNet201_TrainCrossVal_128_v1.ipynb),** **[CNN_EfficientNetB0_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_EfficientNetB0_TrainCrossVal_128_v1.ipynb),** **[CNN_InceptionResNetV2_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_InceptionResNetV2_TrainCrossVal_128_v1.ipynb),** **[CNN_InceptionV3_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_InceptionV3_TrainCrossVal_128_v1.ipynb),** **[CNN_NASNetMobile_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_NASNetMobile_TrainCrossVal_128_v1.ipynb),** **[CNN_RestNet152V2_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_RestNet152V2_TrainCrossVal_128_v1.ipynb),** **[CNN_Xception_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_Xception_TrainCrossVal_128_v1.ipynb)**: In this family of notebooks the eigth CNNs are trained and cross-validated using the stratified K-fold strategy, where K is set to 5. These notebook generate the cross-validated feature vectors, required to train the LightGBM models. As already pointed out, these vectors are produced out-of-sample in order to prevent the training process of the ML models from data leackage. The CNNs that have been used for this project are: [DenseNet121](https://keras.io/api/applications/densenet/), [DenseNet201](https://keras.io/api/applications/densenet/), [EfficientNetB0](https://keras.io/api/applications/efficientnet/), [InceptionResNetV2](https://keras.io/api/applications/inceptionresnetv2/), [InceptionV3](https://keras.io/api/applications/inceptionv3/), [NASNetMobile](https://keras.io/api/applications/nasnet/), [ResNet152V2](https://keras.io/api/applications/resnet/#resnet152v2-function), [Xception](https://keras.io/api/applications/xception/). **Note:** GPU execution is recommended for this notebook.
 - **[Train_CNNs_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Train_CNNs_v1.ipynb)**: This notebook is used to train the eight CNNs with the following backbones: BenseNet121, DenseNet201, EfficientNetB0, InceptionResNetV2, InceptionV3, NASNetMobile, ResNet152V2, Xception. All these networks have the same fully connected neural networks: a GlobalAveragePooling stage serializing the output of the backbone; three hidden layers with 1024, 1024, and 64 neurons, respectively; and one single-neuron layer with a sigmoid activation function for binary classification. The whole CNNs, including their backbone stages, have been trained with a GeForce RTX 4070 GPU. **Note:** GPU execution is recommended for this notebook.
