@@ -92,8 +92,8 @@ $$\sqrt{\min(p_1, p_2, \dots, p_8)}$$
 
 The second model, MODEL_LGB_2, boosts the first-model estimations to make better predictions. Its input features are the following:
 
-* The LGB_1-based predictions, output of MODEL_LGB_1 (1)
 * The 8 image-based cancer predictions, outputs of the CNNs (8)
+* The LGB_1-based predictions, output of MODEL_LGB_1 (1)
 * The metadata features: original (39) + feature engineering (50)
 
 <br>
