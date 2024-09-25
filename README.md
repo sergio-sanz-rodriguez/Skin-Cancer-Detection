@@ -58,13 +58,17 @@ The three boosting classifiers rely on the same pre-processing pipeline (see Fig
 
 Finally, the outputs of the boosting classifiers are evaluated using the **Soft Voting** ensemble method. Although different weitghed averages were tested, the one that produced the best balance between publick pAUC scores, representing around 28% of the total test samples, and private pAUC scores, representing the remaining 72%, was the arithmetic averate, that is, weights [1/3, 1/3, 1/3]. 
 
+### 6.2. pAUC Results
+
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
 - **Cross-validation score (training)**: 0.1653
 - **Public Score (~28% of test data)**: 0.1649
 - **Private Score (~72% of test data)**: 0.1516
 
-### 6.2. Description of the Notebooks
+As can be seen, the pAUC score obtained during training is quite similar to that obtained using 28% of the (blind) test data set. However, the model performance decreases about 8% in the remaining test samples.
+
+### 6.3. Description of the Notebooks
 
 - **[Notebook_Skin_Cancer_Detection_v5/v6.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notebook_Skin_Cancer_Detection_v6.ipynb)**: A notebook unifying the whole skin cancer detection worflow: training with cross-validation, and inference. The training with cross-validation process is divided into the following stages: Exploratory Data Analysis (EDA) and cleaning, metadata Feature Engineering (FE), CNN-model training, and ML-model training (XGB, LGB, GBM). The inference stage makes predictions using the already trained models and the test dataset. Versions v5 and v6 are identical, but v6 achieve slightly better training scores. **Note:** GPU execution is recommended for this notebook.
 - **[Prepare_Images_CNN_v1.pynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Prepare_Images_CNN_v1.ipynb)**: This notebook classifies the training image set into two target categories: benign and malignant. Two folders created: "0" and "1". In folder "0" the images with benign lesions are stored, whereas the rest of images go to folder "1". The parent directory called **"crossval"** shall be used for the reproducibility of the remaning notebooks. The other folders, "train" and "test" are used for internal purposes only.
