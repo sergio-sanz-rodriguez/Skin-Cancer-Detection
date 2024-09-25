@@ -72,7 +72,22 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **[Notes.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notes.ipynb)**: A document containing useful recommendations and code snippets for training CNNs. It includes guidance on enabling GPU support with Keras, handling data imbalance problems, and addressing other training-related issues.
 
   ## Enhanced Machine Learning Architecture
- Fixme.
+ The proposed enhanced architecture is illustrated in Figure 3. It consists of two LightGBM boosting models: **MODEL_LGB_1** and **MODEL_LGB_2**. The first model estimates the probability of malignant case, taking as inputs the following 100 features:
+* The 8 image-based cancer predictions, outputs of the CNNs (8)
+* The square root of the minimum value of the 8 CNN predictions (1)
+* The metadata features: original (41) + feature engineering (50)
+
+It is worth mentioning that several statistics from the 8 CNN-based feature vectors were computed, such as the mean, miminum, maximum, standard deviation, kurtosis, etc. It was found that the square root of the minimum value is the feature with the highest relevance to the target variable acoording to the K-best score.
+
+$$\sqrt{\min(p_1, p_2, \dots, p_8)}$$
+
+The second model, MODEL_LGB_2, boosts the first-model estimations to make better predictions. Its input features are the following:
+
+* The LGB_1-based predictions, output of MODEL_LGB_1 (1)
+* The 8 image-based cancer predictions, outputs of the CNNs (8)
+* The metadata features: original (41) + feature engineering (50)
+
+In addition, a feedback look can be enabled, by connecting the output with its input. The feedback loop finished when the output is no longer improved or a certain number of trials, MAX_TRIALS_PRED, is reached.
 
  <br>
 <div align="center">
@@ -80,6 +95,8 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
   <p><strong>Figure 2:</strong> Proposed machine learning architecture</p>
 </div>
 <br>
+
+Figure 4 shows the preprocessing stage of each ML model. Unlike the above described baseline architecture, the standard randoum oversampler for the malignan class has been selected, leading to better pAUCs scores.
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
