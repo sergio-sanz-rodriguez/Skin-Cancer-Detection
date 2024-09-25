@@ -34,7 +34,7 @@ Another key aspect to highlight is that there is no feature in the metadata that
 
 ## 6. Proposed Machine Learning Model (Submited to Kaggle)
 
-## 6.1. Description of the Architecture
+### 6.1. Description of the Architecture
 
 As shown in Figure 1, the proposed machine learning model consists of a **Convolutional Neural Network (CNN)**, three boosting classifiers: **XGBoost (XGB)**, **LightGBM (LGB)**, and **Gradient Boosting Machine (GBM)**, and a a final **Soft Voting** predictor. The CNN architecture is composed of a [ResNet152V2](https://keras.io/api/applications/resnet/#resnet152v2-function) backbone for feature extraction, a global average pooling layer as an input layer to the neural network, a hidden layer with 64 neurons, and an output layer with a sigmoid activation function for binary classification. It is worth mentioning that the backone layers have also been trained (i.e., no transfer learning was used) to maximize prediction accuracy and recall. The GPU used for training the model is GeForce RTX 4070.
 
