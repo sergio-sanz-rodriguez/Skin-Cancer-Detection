@@ -4,35 +4,37 @@
 
 # Skin Cancer Detection Project
 
-## Authors
+## 1. Authors
 
 [Mila Miletic](https://www.linkedin.com/in/mila-miletic-19168a123/)    
 [Sergio Sanz](https://www.linkedin.com/in/sergio-sanz-rodriguez/)
 
-## Overview
+## 2. Overview
 
 This project belongs to a Kaggle competition on [ISIC 2024 - Skin Cancer Detection with 3D-TBP](https://www.kaggle.com/competitions/isic-2024-challenge/overview) with a submission deadline on September 6, 2024.
 
 The project focuses on the development of machine learning (ML) and deep learning (DL) algorithms to identify histologically confirmed skin cancer cases with single-lesion crops from body images. In addition to the image database, a comprehensive set of metadata information related to the lesion is used to train the models. For more information about the metadata features, please visit the aforementioned link. In this challenge a binary classification system is built, tested and evaluated, combining image-based deep learning neural networks with advanced machine learning models to identify whether the sample corresponds to a benign or a malignant case. 
 
-## Description (from Kaggle Website)
+## 3. Description (from Kaggle Website)
 Skin cancer can be deadly if not caught early, but many populations lack specialized dermatologic care. Over the past several years, dermoscopy-based AI algorithms have been shown to benefit clinicians in diagnosing melanoma, basal cell, and squamous cell carcinoma. However, determining which individuals should see a clinician in the first place has great potential impact. Triaging applications have a significant potential to benefit underserved populations and improve early skin cancer detection, the key factor in long-term patient outcomes.
 
 Dermatoscope images reveal morphologic features not visible to the naked eye, but these images are typically only captured in dermatology clinics. Algorithms that benefit people in primary care or non-clinical settings must be adept to evaluating lower quality images. This competition leverages 3D TBP to present a novel dataset of every single lesion from thousands of patients across three continents with images resembling cell phone photos.
 
 This competition aims to develop AI algorithms that differentiate histologically-confirmed malignant skin lesions from benign lesions on a patient. This work will help to improve early diagnosis and disease prognosis by extending the benefits of automated skin cancer detection to a broader population and settings.
 
-## Evaluation Metric
+## 4. Evaluation Metric
 
 The metric that has been used in the project is the [partial area under the ROC curve](https://en.wikipedia.org/wiki/Partial_Area_Under_the_ROC_Curve) (pAUC) above 80% true positive rate (TPR) for binary classification of malignant examples. (See the implementation in the notebook [ISIC pAUC-aboveTPR](https://www.kaggle.com/code/metric/isic-pauc-abovetpr).)
 
-## Challenges
+## 5. Challenges
 
 Apart from the magnitude of its complexity, the main challenge of this project is working with an extremely imbalanced dataset. Specifically, the database includes about 400 malignant cases versus 400,000 benign cases, 1,000 more benign cases than malignant lesions.
 
 Another key aspect to highlight is that there is no feature in the metadata that is highly correlated with the target. An in-depth analysis of the metadata, as well as a lot of feature engineering effort, is required to obtain very good partial AUC scores. Therefore, the machine learning models proposed in this project are fed with a large number of features, most of which have been re-generated from the original ones.
 
-## Proposed Machine Learning Architecture (Submited to Kaggle)
+## 6. Proposed Machine Learning Model (Submited to Kaggle)
+
+## 6.1. Description of the Architecture
 
 As shown in Figure 1, the proposed machine learning model consists of a **Convolutional Neural Network (CNN)**, three boosting classifiers: **XGBoost (XGB)**, **LightGBM (LGB)**, and **Gradient Boosting Machine (GBM)**, and a a final **Soft Voting** predictor. The CNN architecture is composed of a [ResNet152V2](https://keras.io/api/applications/resnet/#resnet152v2-function) backbone for feature extraction, a global average pooling layer as an input layer to the neural network, a hidden layer with 64 neurons, and an output layer with a sigmoid activation function for binary classification. It is worth mentioning that the backone layers have also been trained (i.e., no transfer learning was used) to maximize prediction accuracy and recall. The GPU used for training the model is GeForce RTX 4070.
 
@@ -62,7 +64,7 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **Public Score (~28% of test data)**: 0.1649
 - **Private Score (~72% of test data)**: 0.1516
 
-## Description of the Notebooks
+### 6.2. Description of the Notebooks
 
 - **[Notebook_Skin_Cancer_Detection_v5/v6.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notebook_Skin_Cancer_Detection_v6.ipynb)**: A notebook unifying the whole skin cancer detection worflow: training with cross-validation, and inference. The training with cross-validation process is divided into the following stages: Exploratory Data Analysis (EDA) and cleaning, metadata Feature Engineering (FE), CNN-model training, and ML-model training (XGB, LGB, GBM). The inference stage makes predictions using the already trained models and the test dataset. Versions v5 and v6 are identical, but v6 achieve slightly better training scores. **Note:** GPU execution is recommended for this notebook.
 - **[Prepare_Images_CNN_v1.pynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Prepare_Images_CNN_v1.ipynb)**: This notebook classifies the training image set into two target categories: benign and malignant. Two folders created: "0" and "1". In folder "0" the images with benign lesions are stored, whereas the rest of images go to folder "1". The parent directory called **"crossval"** shall be used for the reproducibility of the remaning notebooks. The other folders, "train" and "test" are used for internal purposes only.
@@ -71,7 +73,10 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **[MLModels_TrainCrossVal_Optuna_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/MLModels_TrainCrossVal_Optuna_v1.ipynb)**: This notebook is dedicatetd to hyperparameter optimization for multiple ML models. The algorithm relies on the [Optuna](https://optuna.readthedocs.io/en/stable/index.html) framework to explore and identifiy the best hyperparameter set that maximizes the pAUC score. To ensure robust model evaluation, stratified K-fold cross-validation is utilized on top of Optuna.
 - **[Notes.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Notes.ipynb)**: A document containing useful recommendations and code snippets for training CNNs. It includes guidance on enabling GPU support with Keras, handling data imbalance problems, and addressing other training-related issues.
 
-  ## Enhanced Machine Learning Architecture
+  ## 7. Enhanced Machine Learning Model
+  
+  ### 7.1. Description of the Architecture
+  
  The proposed enhanced architecture is illustrated in Figure 3. It consists of two LightGBM boosting models: **MODEL_LGB_1** and **MODEL_LGB_2**. The first model estimates the probability of malignant case, taking as inputs the following 98 features:
 * The 8 image-based cancer predictions, outputs of the CNNs (8)
 * The square root of the minimum value of the 8 CNN predictions (1)
@@ -111,7 +116,7 @@ The Partial AUC (pAUC) scores achieved in the competition are as follows:
 - **Public Score (~28% of test data)**: 0.1681
 - **Private Score (~72% of test data)**: 0.1557
 
-## Description of the Notebooks
+### 7.2. Description of the Notebooks
 
 - **[CNN_DenseNet121_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_DenseNet121_TrainCrossVal_128_v1.ipynb),** **[CNN_DenseNet201_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_DenseNet201_TrainCrossVal_128_v1.ipynb),** **[CNN_EfficientNetB0_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_EfficientNetB0_TrainCrossVal_128_v1.ipynb),** **[CNN_InceptionResNetV2_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_InceptionResNetV2_TrainCrossVal_128_v1.ipynb),** **[CNN_InceptionV3_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_InceptionV3_TrainCrossVal_128_v1.ipynb),** **[CNN_NASNetMobile_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_NASNetMobile_TrainCrossVal_128_v1.ipynb),** **[CNN_RestNet152V2_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_RestNet152V2_TrainCrossVal_128_v1.ipynb),** **[CNN_Xception_TrainCrossVal_128_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/CNN_Xception_TrainCrossVal_128_v1.ipynb)**: In this family of notebooks the eigth CNNs are trained and cross-validated using the stratified K-fold strategy, where K is set to 5. These notebook generate the cross-validated feature vectors, required to train the LightGBM models. As already pointed out, these vectors are produced out-of-sample in order to prevent the training process of the ML models from data leackage. The CNNs that have been used for this project are: [DenseNet121](https://keras.io/api/applications/densenet/), [DenseNet201](https://keras.io/api/applications/densenet/), [EfficientNetB0](https://keras.io/api/applications/efficientnet/), [InceptionResNetV2](https://keras.io/api/applications/inceptionresnetv2/), [InceptionV3](https://keras.io/api/applications/inceptionv3/), [NASNetMobile](https://keras.io/api/applications/nasnet/), [ResNet152V2](https://keras.io/api/applications/resnet/#resnet152v2-function), [Xception](https://keras.io/api/applications/xception/). **Note:** GPU execution is recommended for this notebook.
 - **[Train_CNNs_v1.ipynb](https://github.com/sergio-sanz-rodriguez/Skin-Cancer-Detection/blob/main/notebooks/Train_CNNs_v1.ipynb)**: This notebook is used to train the eight CNNs with the following backbones: BenseNet121, DenseNet201, EfficientNetB0, InceptionResNetV2, InceptionV3, NASNetMobile, ResNet152V2, Xception. All these networks have the same fully connected neural networks: a GlobalAveragePooling stage serializing the output of the backbone; three hidden layers with 1024, 1024, and 64 neurons, respectively; and one single-neuron layer with a sigmoid activation function for binary classification. The whole CNNs, including their backbone stages, have been trained with a GeForce RTX 4070 GPU. **Note:** GPU execution is recommended for this notebook.
