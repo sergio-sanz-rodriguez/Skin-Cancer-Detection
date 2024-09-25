@@ -130,4 +130,4 @@ As observed, the improved model generally performs better on both the training a
 
 ## 8. Future Work
 
-The prediction accuracy of the enhanced model could be improved by replacing each LGB model with an ensemble architecture composed of several LGB models (e.g., 4) and a soft voting classifier. This approach may improve generalization by reducing the difference between the pAUC score on 28% of the test data and that on the remaining 72%.
+The prediction accuracy of the enhanced model could be improved by replacing each LGB model with an ensemble architecture composed of several LGB models (e.g., 4) and a soft voting classifier. This approach may improve generalization by reducing the difference between the pAUC score on 28% of the test data and that on the remaining 72%. Although this approach results in higher computational cost, it is still feasible and below the time limit of 8 hours specified in the Kaggle comptetition.
