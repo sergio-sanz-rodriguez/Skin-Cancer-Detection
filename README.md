@@ -117,9 +117,9 @@ Figure 4 shows the complete pipeline of the ML models, including: preprocessing,
 
 The Partial AUC (pAUC) scores achieved in the competition are as follows:
 
-- **Cross-validation score (training)**: 0.1696
-- **Public Score (~28% of test data)**: 0.1681
-- **Private Score (~72% of test data)**: 0.1557
+- **Cross-validation score (training)**: 0.1694
+- **Public Score (~28% of test data)**: 0.1672
+- **Private Score (~72% of test data)**: 0.1565
 
 As observed, the improved model generally performs better on both the training and test datasets. On 72% of the test data, this model achieves a pAUC score of 0.1557, compared to 0.1516 achieved by the previous model.
 
