@@ -81,12 +81,15 @@ As can be seen, the pAUC score obtained during training is quite similar to that
   
   ### 7.1. Description of the Architecture
   
- The proposed enhanced architecture is illustrated in Figure 3. It consists of two LightGBM boosting models: **MODEL_LGB_1** and **MODEL_LGB_2**. The first model estimates the probability of malignant case, taking as inputs the following 98 features:
+ The proposed enhanced architecture is illustrated in Figure 3. It consists of two LightGBM boosting models: **MODEL_LGB_1** and **MODEL_LGB_2**. Among all the models tested, the LigthGBM architecture provides the highest prediction accuracy at the lowest training team.
+ 
+ The first model estimates the probability of malignant case, taking as inputs the following 98 features:
+ 
 * The 8 image-based cancer predictions, outputs of the CNNs (8)
 * The square root of the minimum value of the 8 CNN predictions (1)
 * The metadata features: original (39) + feature engineering (50)
 
-It is worth mentioning that several statistics from the 8 CNN-based feature vectors were computed, such as the mean, miminum, maximum, standard deviation, kurtosis, etc. It was found that the square root of the minimum value is the feature with the highest relevance to the target variable acoording to the K-best score.
+It is worth mentioning that several statistics from the 8 CNN-based feature vectors were computed, such as the mean, miminum, maximum, standard deviation, kurtosis, etc. It was found that the square root of the minimum value is the feature with the highest relevance to the target variable according to the K-best score.
 
 $$\sqrt{\min(p_1, p_2, \dots, p_8)}$$
 
